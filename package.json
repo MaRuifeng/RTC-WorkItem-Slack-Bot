@@ -1,0 +1,29 @@
+{
+  "name": "slack-workitems",
+  "version": "0.0.4",
+  "description": "Show RTC work items in Slack",
+  "main": "rtc.js",
+  "dependencies": {
+    "html-to-text": "~1.2.1",
+    "promise": "~6.1.0",
+    "relative-date": "~1.1.2",
+    "request": "^2.64.0",
+    "request-promise": "~0.4.0",
+    "slackr-bot": "git://github.com/ehues/slackr-bot.git",
+    "string-template": "~0.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ehues/slack-workitems.git"
+  },
+  "author": "Evan Hughes <evan.c.hughes@gmail.com>",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/ehues/slack-workitems/issues"
+  },
+  "homepage": "https://github.com/ehues/slack-workitems"
+}
