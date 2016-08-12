@@ -39,6 +39,7 @@ Optional
 3. Run
 
     `docker run -d -P -v /home/ruifeng/git/docker-rtc-wi-bot/secure:/data/secure --name wibot wibot`
+    
     `docker run -d -P -v /home/ruifeng/git/docker-rtc-wi-bot/secure:/data/secure --net=host --name wibot wibot` (in VirtualBox)
 
 If everything is successful, the error channel you specified will display a startup message. If not, you can read the logs by finding the container id, using docker ps, and then doing docker logs <containerId>.
