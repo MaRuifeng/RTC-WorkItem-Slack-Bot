@@ -26,7 +26,7 @@ COPY . /usr/src/app
 # Set up parameters as environment variables
 ENV RTC_USER bpmbuild@sg.ibm.com
 ENV RTC_REPO https://ratsuite192.sby.ibm.com:9443/ccm
-ENV RTC_BOT_TOKEN xoxb-68416225586-5aSHQMVBwUm3OGbSRPHV1nAD
+ENV RTC_BOT_TOKEN xoxb-68416225586-OoeSqZdJptM82y9tguBEIQM3
 ENV RTC_WEBHOOK https://hooks.slack.com/services/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
 ENV RTC_ERROR_CHANNEL rtc_test
 
