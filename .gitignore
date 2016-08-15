@@ -1,0 +1,2 @@
+# Ignore environment variable set up scritp for local development
+/set_var.sh
