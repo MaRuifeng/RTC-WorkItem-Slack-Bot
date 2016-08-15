@@ -1,2 +1,5 @@
 # Ignore environment variable set up scritp for local development
 /set_var.sh
+
+# Ignore local node modules
+/node_modules
