@@ -35,7 +35,7 @@ Optional
 
     `docker build -t wibot .`
     
-2. Store the credential file named 'rtc_pass' in a folder accessible by the docker container as a data volume
+2. Store the credential files named 'rtc_pass', 'rtc_bot_token' and 'rtc_webhook' in a folder accessible by the docker container as a data volume
 3. Run
 
     `docker run -d -P -v /home/ruifeng/git/docker-rtc-wi-bot/secure:/data/secure --name wibot wibot`
