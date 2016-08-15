@@ -3,3 +3,6 @@
 
 # Ignore local node modules
 /node_modules
+
+# Ignore crendential folder
+/secure
