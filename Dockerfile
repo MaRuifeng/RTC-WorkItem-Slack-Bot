@@ -26,10 +26,8 @@ COPY . /usr/src/app
 # Set up parameters as environment variables
 ENV RTC_USER bpmbuild@sg.ibm.com
 ENV RTC_REPO https://ratsuite192.sby.ibm.com:9443/ccm
-# ENV RTC_BOT_TOKEN xoxb-67265064129-8I2sBYWb7pWjvNMHs9KtdYdk
 ENV RTC_BOT_TOKEN xoxb-68416225586-5aSHQMVBwUm3OGbSRPHV1nAD
-# ENV RTC_WEBHOOK  https://hooks.slack.com/services/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
-ENV RTC_WEBHOOK  https://hooks.slack.com/services/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
+ENV RTC_WEBHOOK https://hooks.slack.com/services/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
 ENV RTC_ERROR_CHANNEL rtc_test
 
 ENV WIBOT_VERSION 0.0.4
