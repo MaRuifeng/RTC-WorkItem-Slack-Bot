@@ -12,6 +12,16 @@ function load_env(name, desc) {
 		value = fs.readFileSync('/data/secure/rtc_pass', 'utf8');
 		value = value.trim();
     }
+
+    if (name == "RTC_BOT_TOKEN" && ("" == value || undefined === value)){
+        value = fs.readFileSync('/data/secure/rtc_bot_token', 'utf8');
+        value = value.trim();
+    }
+
+    if (name == "RTC_WEBHOOK" && ("" == value || undefined === value)){
+        value = fs.readFileSync('/data/secure/rtc_webhook', 'utf8');
+        value = value.trim();
+    }
     
     
     if ("" == value || undefined === value) {
