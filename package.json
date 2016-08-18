@@ -18,12 +18,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ehues/slack-workitems.git"
+    "url": "https://github.com/MaRuifeng/RTC-WorkItem-Slack-Bot.git"
   },
-  "author": "Evan Hughes <evan.c.hughes@gmail.com>",
-  "license": "BSD-2-Clause",
+  "author": "Ruifeng Ma <ruifengm@sg.ibm.com>",
+  "license": "none",
+  "acknowledgement": "Evan Hughes <evan.c.hughes@gmail.com>",
   "bugs": {
-    "url": "https://github.com/ehues/slack-workitems/issues"
+    "url": "https://github.com/MaRuifeng/RTC-WorkItem-Slack-Bot/issues"
   },
-  "homepage": "https://github.com/ehues/slack-workitems"
+  "homepage": "https://github.com/MaRuifeng/RTC-WorkItem-Slack-Bot"
 }
