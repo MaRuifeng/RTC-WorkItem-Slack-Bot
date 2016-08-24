@@ -31,20 +31,21 @@ Optional
 `WIBOT_VERSION` - version string identifying the version of this RTC work item bot On startup it will be displayed in the error channel.
  
 # Run the bot
-1. Build the work item bot docker images
+1. Build the work item bot docker images.
 
     `docker build -t wibot .`
     
-2. Store the credential files named 'rtc_pass', 'rtc_bot_token' and 'rtc_webhook' in a folder accessible by the docker container as a data volume
-3. Run
+2. Store the credential files named 'rtc_pass', 'rtc_bot_token' and 'rtc_webhook' in a folder accessible by the docker container as a data volume.
+
+3. Run the container.
 
     `docker run -d -P -v /home/ruifeng/git/docker-rtc-wi-bot/secure:/data/secure --name wibot wibot`
     
     `docker run -d -P -v /home/ruifeng/git/docker-rtc-wi-bot/secure:/data/secure --net=host --name wibot wibot` (in VirtualBox)
+    
+    If everything is successful, the error channel you specified will display a startup message. If not, you can read the logs by finding the container id, using docker ps, and then doing docker logs <containerId>.
 
-If everything is successful, the error channel you specified will display a startup message. If not, you can read the logs by finding the container id, using docker ps, and then doing docker logs <containerId>.
-
-4. Invite the bot user into the designated Slack channel, enter a message with trigger words like 'task', 'story' or 'defect' etc. with a work item number and see what the bot user replies. 
+4. Invite the bot user into the designated Slack channel, enter a message with trigger words like 'task', 'story' or 'defect' etc. with a work item number and see what the bot user replies.
 
 # Adapted from
 
