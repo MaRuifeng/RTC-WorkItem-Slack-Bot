@@ -6,7 +6,7 @@ A Slack bot that displays an RTC work item summary when its number is mentioned 
 
 # Configuration
 
-Set the following environment variables in the Dockerfile. Not that the Slack bot token and webhook url should be kept in secret and shall never be exposed in source code. 
+Set the following environment variables in the Dockerfile. Not that the RTC password, Slack bot token and webhook url should be kept in secret and shall never be exposed in source code. 
 
 `RTC_REPO` - URI of the RTC repository. 
 
