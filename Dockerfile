@@ -1,6 +1,6 @@
 # Dockerfile for RTC work item slack bot
 #
-# VERSION 0.0.1
+# VERSION 0.0.4
 # AUTHOR  Ruifeng Ma (ruifengm@sg.ibm.com)
 
 # This file creates a container from the node.js 

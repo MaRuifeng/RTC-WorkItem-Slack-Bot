@@ -44,6 +44,8 @@ Optional
 
 If everything is successful, the error channel you specified will display a startup message. If not, you can read the logs by finding the container id, using docker ps, and then doing docker logs <containerId>.
 
+4. Invite the bot user into the designated Slack channel, enter a message with trigger words like 'task', 'story' or 'defect' etc. with a work item number and see what the bot user replies. 
+
 # Adapted from
 
 [slack-workiteam](https://github.com/ehues/slack-workitems) - A bot that writes RTC work item information into Slack channels.
