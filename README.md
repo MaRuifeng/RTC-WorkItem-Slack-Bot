@@ -45,7 +45,7 @@ Optional
     
     If everything is successful, the error channel you specified will display a startup message. If not, you can read the logs by finding the container id, using docker ps, and then doing docker logs <containerId>.
 
-4. Invite the bot user into the designated Slack channel, enter a message containing trigger words like 'task', 'story' or 'defect' etc. with a work item number and see what the bot user replies. Supported trigger words include 'bug', 'story', 'task', 'wi', 'defect', 'opened', 'work item' and '<work_item_number>: '. 
+4. Invite the bot user into the designated Slack channel, enter a message containing trigger words like 'task', 'story' or 'defect' etc. with a work item number and see what the bot user replies. Supported trigger words include 'bug', 'story', 'task', 'wi', 'defect', 'opened', 'work item' and '/<work_item_number/>: '. 
 
 # Adapted from
 
