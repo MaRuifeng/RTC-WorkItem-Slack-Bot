@@ -2,6 +2,8 @@
 
 A Slack bot that displays an RTC work item summary when its number is mentioned in a channel. 
 
+NOTE: this branch is created to test with a Jenkins bot. Jenkins token should be secured in a file named jenkins_build_token.
+
 ![sample](images/sample.png)
 
 # Configuration
