@@ -29,6 +29,8 @@ COPY . /usr/src/app
 ENV RTC_REPO https://ratsuite192.sby.ibm.com:9443/ccm
 ENV RTC_USER bpmbuild@sg.ibm.com
 ENV RTC_ERROR_CHANNEL rtc_test
+ENV JENKINS_HOST https://itaas-build.sby.ibm.com
+ENV JENKINS_PORT 9443
 
 ENV WIBOT_VERSION 0.0.4
 

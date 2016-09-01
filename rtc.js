@@ -1,10 +1,13 @@
 
 var html2text = require('html-to-text');
 var WorkItems = require('./wi.js');
+var JenkinsBuild = require('./jenkins.js')
 var relDate = require('relative-date');
 var format = require('string-template');
 var pkg = require('./package');
 var fs = require('fs');
+
+var https = require('https');
 
 function load_env(name, desc) {
     var value = process.env[name];
@@ -23,6 +26,10 @@ function load_env(name, desc) {
         value = value.trim();
     }
     
+    if (name == "JENKINS_BUILD_TOKEN" && ("" == value || undefined === value)){
+        value = fs.readFileSync('/data/secure/jenkins_build_token', 'utf8');
+        value = value.trim();
+    }
     
     if ("" == value || undefined === value) {
     	
@@ -47,6 +54,12 @@ var WEBHOOK = load_env("RTC_WEBHOOK", "It is the Slack webhook to use for rich a
 var RTC_URI_OVERRIDE = process.env.RTC_URI_OVERRIDE;
 
 var wiFetcher = new WorkItems(REPO, USER, PASS);
+
+var JENKINS_HOST = load_env("JENKINS_HOST", "It is the host of Jenkins server.");
+var JENKINS_PORT = load_env("JENKINS_PORT", "It is the port of Jenkins server.");
+var JENKINS_BUILD_TOKEN = load_env("JENKINS_BUILD_TOKEN", "It is the job build token of Jenkins server.");
+
+var jenkinsBuilder = new JenkinsBuild(JENKINS_HOST, JENKINS_PORT, JENKINS_BUILD_TOKEN);
 
 var ERR_CHANNEL = process.env.RTC_ERROR_CHANNEL;
 if (ERR_CHANNEL[0] != '#') {
@@ -84,7 +97,6 @@ if (RTC_URI_OVERRIDE) {
 // The handler for matches on the channel
 function handleWorkItemMatch(message, match) {
     console.log("got " + match[1]);
-
     message.typing();
 
     wiFetcher.fetchOSLC(match[1]).then(function(wi) {
@@ -202,6 +214,52 @@ function handleWorkItemMatch(message, match) {
 
 }
 
+// The handler of Jenkins build request on the channel
+function handleJenkinsBuildRequest(message, match) {
+
+    console.log(match);
+    console.log("Recieved " + match[1]);
+
+    message.typing();
+
+    var jobName = match[1];
+
+    jenkinsBuilder.trigger(jobName).then(function(result) {
+        message.reply({
+            text: "<@" + message.userData.id + ">",
+            attachments: [{
+                    fallback: "Jenkins build of " + jobName + "requested.",
+                    title: "Jenkins build of " + jobName,
+                    title_link: JENKINS_HOST + ":" + JENKINS_PORT + "/job/" + jobName + "/",
+                    text: "Build started, watch out for result notifications.",
+                    color: "#7CD197",
+                    mrkdwn_in: ["pretext", "text"]
+            }]
+        });
+    }, function(err) {
+        console.log("Error");
+        console.log(err);
+
+        var errMsg = "Failed to request Jenkins build  " + jobName + ".";
+        var chan = sess.channelData(message.data.channel);
+        if (chan) {
+            errMsg += " (referenced in channel #" + chan.name + ")";
+        }
+        message.reply({
+            //text: "@" + sess.userId(message.userData.name),
+            text: "<@" + message.userData.id + ">",
+            attachments: [{
+                    color: 'danger',
+                    fallback: errMsg,
+                    title: errMsg,
+                    text: JSON.stringify(err, null, 2),
+                    mrkdwn_in: ["pretext", "text", "title"]
+            }]
+        });
+    });
+}
+
+// RTC
 sess.on(/bug\s*(\d+)/i, handleWorkItemMatch);
 sess.on(/story\s*(\d+)/i, handleWorkItemMatch);
 sess.on(/task\s*(\d+)/i, handleWorkItemMatch);
@@ -211,6 +269,9 @@ sess.on(/opened\s*(\d+)/i, handleWorkItemMatch);
 sess.on(/work\s*item\s*(\d+)/i, handleWorkItemMatch);
 sess.on(/\b(\d+): \S*/i, handleWorkItemMatch);
 sess.on(/http\S*action=com.ibm.team.workitem.viewWorkItem\S*id=(\d+)/i, handleWorkItemMatch);
+
+// Jenkins
+sess.on(/^Build\s*(\S+)$/i, handleJenkinsBuildRequest); // E.g. Build CCSSD-Utility
 
 require("./interactions/bark")(sess);
 require("./interactions/karma")(sess);
