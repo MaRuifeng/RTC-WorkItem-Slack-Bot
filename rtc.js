@@ -259,6 +259,52 @@ function handleJenkinsBuildRequest(message, match) {
     });
 }
 
+// The handler of Jenkins build request on the channel particularly for job CCSSD-Fork_ACSE_Cookbooks
+function handleJenkinsForkCookbooksRequest(message, match) {
+
+    console.log(match);
+    console.log("Recieved " + match[1]);
+
+    message.typing();
+
+    var param_release_sprint = match[1];
+    var param_new_sprint = match[2]
+
+    jenkinsBuilder.fork_cookbooks(param_release_sprint, param_new_sprint).then(function(result) {
+        message.reply({
+            text: "<@" + message.userData.id + ">",
+            attachments: [{
+                    fallback: "Jenkins build of CCSSD-Fork_ACSE_Cookbooks requested.",
+                    title: "Jenkins build of " + "CCSSD-Fork_ACSE_Cookbooks",
+                    title_link: JENKINS_HOST + ":" + JENKINS_PORT + "/job/CCSSD-Fork_ACSE_Cookbooks/",
+                    text: "Build started, watch out for result notifications.",
+                    color: "#7CD197",
+                    mrkdwn_in: ["pretext", "text"]
+            }]
+        });
+    }, function(err) {
+        console.log("Error");
+        console.log(err);
+
+        var errMsg = "Failed to request Jenkins build CCSSD-Fork_ACSE_Cookbooks.";
+        var chan = sess.channelData(message.data.channel);
+        if (chan) {
+            errMsg += " (referenced in channel #" + chan.name + ")";
+        }
+        message.reply({
+            //text: "@" + sess.userId(message.userData.name),
+            text: "<@" + message.userData.id + ">",
+            attachments: [{
+                    color: 'danger',
+                    fallback: errMsg,
+                    title: errMsg,
+                    text: JSON.stringify(err, null, 2),
+                    mrkdwn_in: ["pretext", "text", "title"]
+            }]
+        });
+    });
+}
+
 // RTC
 sess.on(/bug\s*(\d+)/i, handleWorkItemMatch);
 sess.on(/story\s*(\d+)/i, handleWorkItemMatch);
@@ -272,6 +318,7 @@ sess.on(/http\S*action=com.ibm.team.workitem.viewWorkItem\S*id=(\d+)/i, handleWo
 
 // Jenkins
 sess.on(/^Build\s*(\S+)$/i, handleJenkinsBuildRequest); // E.g. Build CCSSD-Utility
+sess.on(/^Fork\s*ACSE\s*cookbooks\s*(ivt_\d+\.\d+)\s*(ivt_\d+\.\d+)$/i, handleJenkinsForkCookbooksRequest); // E.g. Fork ACSE cookbooks ivt_13.1 ivt_13.2
 
 require("./interactions/bark")(sess);
 require("./interactions/karma")(sess);
