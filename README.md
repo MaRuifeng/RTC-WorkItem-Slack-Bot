@@ -41,6 +41,8 @@ Optional
 3. Run
 
     `docker run -d -P -v /home/ruifeng/git/docker-rtc-wi-bot/secure:/data/secure --name wibot wibot`
+
+    `docker run -d -P -v /home/ruifeng/git/docker-rtc-wi-bot/secure:/data/secure --restart=always --name wibot wibot`
     
     `docker run -d -P -v /home/ruifeng/git/docker-rtc-wi-bot/secure:/data/secure --net=host --name wibot wibot` (in VirtualBox)
 

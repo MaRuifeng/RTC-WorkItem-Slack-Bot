@@ -45,6 +45,7 @@ JenkinsBuild.prototype.fork_cookbooks = function(param_release_sprint, param_new
     var self = this;
     return new Promise(function(resolve, reject) {
         console.log("Starting Jenkins build job CCSSD-Fork_ACSE_Cookbooks with parameters...");
+        console.log(self.host + ":" + self.port + "/job/CCSSD-Fork_ACSE_Cookbooks/buildWithParameters?token=" + self.token + "&NEW_SPRINT=" + param_new_sprint + "&RELEASE_SPRINT=" + param_release_sprint);
         self.req.get(self.host + ":" + self.port + "/job/CCSSD-Fork_ACSE_Cookbooks/buildWithParameters?token=" + self.token + "&NEW_SPRINT=" + param_new_sprint + "&RELEASE_SPRINT=" + param_release_sprint,
             function (err, resp, body) {
                 console.log(err);
